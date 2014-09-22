@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# vim: set fileencoding=utf-8 :
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets
