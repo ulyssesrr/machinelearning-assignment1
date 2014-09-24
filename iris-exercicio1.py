@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 
 import numpy as np
-import matplotlib.pyplot as plt
+import pylab as plt
 from sklearn import datasets
 from tabulate import tabulate
 
@@ -33,15 +33,17 @@ print(tabulate(data, header, tablefmt="grid"))
 #	print(tabulate(np.corrcoef(matIris[idx[i]])))
 
 for j, nomeAtrib in enumerate(iris.feature_names):
-	f, axArr = plt.subplots(1, len(classes), sharey=True)
-	axArr[0].set_ylabel('Frequência')
+	f, axArr = plt.subplots(1, 1)
+	axArr.set_ylabel('Frequência')
+	#axArr.set_xlabel(("Iris %s" % nomeClasse))
 	f.text(0.5, 0.975, nomeAtrib, horizontalalignment='center', verticalalignment='top')
+	cMat = []
 	for i, nomeClasse in enumerate(classes):
-		cMat = matIris[idx[i]][:,j]
-		axArr[i].hist(cMat, bins=8, range=(0, np.amax(cMat)))
-#		axArr[i].hist(cMat, bins=8)
-		axArr[i].set_xlabel(("Iris %s" % nomeClasse))
-		axArr[i].grid(True)
+		cMat += [matIris[idx[i]][:,j]]
+
+	axArr.hist(cMat, bins=8, label=classes, histtype='stepfilled', stacked=True)
+	axArr.legend()
+	axArr.grid(True)
 
 plt.show();
 
