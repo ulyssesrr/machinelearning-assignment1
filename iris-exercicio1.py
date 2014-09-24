@@ -34,14 +34,16 @@ print(tabulate(data, header, tablefmt="grid"))
 
 for j, nomeAtrib in enumerate(iris.feature_names):
 	f, axArr = plt.subplots(1, 1)
+	f.canvas.set_window_title(nomeAtrib)
 	axArr.set_ylabel('Frequência')
-	#axArr.set_xlabel(("Iris %s" % nomeClasse))
-	f.text(0.5, 0.975, nomeAtrib, horizontalalignment='center', verticalalignment='top')
+	axArr.set_xlabel(nomeAtrib)
+	#f.text(0.5, 0.975, nomeAtrib, horizontalalignment='center', verticalalignment='top')
 	cMat = []
 	for i, nomeClasse in enumerate(classes):
 		cMat += [matIris[idx[i]][:,j]]
 
-	axArr.hist(cMat, bins=8, label=classes, histtype='stepfilled', stacked=True)
+	axArr.hist(cMat, bins=8, label=classes, alpha=0.5, stacked=True)
+	#axArr.hist(cMat, bins=8, label=classes, alpha=0.5)
 	axArr.legend()
 	axArr.grid(True)
 
