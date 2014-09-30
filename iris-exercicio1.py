@@ -26,11 +26,16 @@ for i, val in enumerate(classes):
 	data += [[("Variância (%s)" % val)] + np.var(matIris[cIdx], axis=0, dtype=np.float64).tolist()]
 	idx = idx + [cIdx]
 
-print(tabulate(data, header, tablefmt="grid"))
+mediasVar = tabulate(data, header, tablefmt="grid")
+f = open("medias_variancia.txt", "w")
+f.write(mediasVar)
+f.close()
 
-#for i, val in enumerate(classes):
-#	print("Matriz de Correlação: %s" % val)
-#	print(tabulate(np.corrcoef(matIris[idx[i]])))
+for i, val in enumerate(classes):
+	file = open("%s %s.txt" % ("matrix_correlacao_", val), "w")
+#	file.write("Matriz de Correlação: %s" % val)
+	file.write(tabulate(np.corrcoef(matIris[idx[i]]), idx[i], tablefmt="grid"))
+	file.close()
 
 for j, nomeAtrib in enumerate(iris.feature_names):
 	f, axArr = plt.subplots(1, 1)
